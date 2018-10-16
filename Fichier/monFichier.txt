@@ -1,0 +1,4 @@
+Je vais bien merci
+A la prochaine
+J'ajoute une nouvelle ligne.
+Sans ecfraser le contenu du fichier

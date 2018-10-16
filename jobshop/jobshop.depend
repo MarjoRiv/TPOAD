@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1539342215 source:/home/LOCAL.ISIMA.FR/mabane/Bureau/jobshop/bkr.cpp
+	"bkr.h"
+	<fstream>
+	<algorithm>
+
+1444324584 /home/LOCAL.ISIMA.FR/mabane/Bureau/jobshop/bkr.h
+	"data.h"
+	<string>
+
+1539338420 /home/LOCAL.ISIMA.FR/mabane/Bureau/jobshop/data.h
+	"Operation.h"
+	<vector>
+
+1539337146 /home/LOCAL.ISIMA.FR/mabane/Bureau/jobshop/Operation.h
+
+1539337893 source:/home/LOCAL.ISIMA.FR/mabane/Bureau/jobshop/Data.cpp
+	"Data.h"
+
+1539343171 source:/home/LOCAL.ISIMA.FR/mabane/Bureau/jobshop/main.cpp
+	<iostream>
+	"instance.h"
+
+1539343115 /home/LOCAL.ISIMA.FR/mabane/Bureau/jobshop/instance.h
+	"Data.h"
+
+1539337656 source:/home/LOCAL.ISIMA.FR/mabane/Bureau/jobshop/Operation.cpp
+	"Operation.h"
+
+1539343149 source:/home/LOCAL.ISIMA.FR/mabane/Bureau/jobshop/instance.cpp
+	"instance.h"
+	<fstream>
+	<string>
+	<iostream>
+

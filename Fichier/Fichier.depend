@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1538093937 source:c:\users\bane\desktop\tpgraphe\fichier\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+
