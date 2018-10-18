@@ -33,3 +33,38 @@
 	<string>
 	<iostream>
 
+1539342215 source:/home/LOCAL.ISIMA.FR/mabane/Bureau/OAD/jobshop/bkr.cpp
+	"bkr.h"
+	<fstream>
+	<algorithm>
+
+1444324584 /home/LOCAL.ISIMA.FR/mabane/Bureau/OAD/jobshop/bkr.h
+	"data.h"
+	<string>
+
+1539338420 /home/LOCAL.ISIMA.FR/mabane/Bureau/OAD/jobshop/data.h
+	"Operation.h"
+	<vector>
+
+1539337146 /home/LOCAL.ISIMA.FR/mabane/Bureau/OAD/jobshop/Operation.h
+
+1539337893 source:/home/LOCAL.ISIMA.FR/mabane/Bureau/OAD/jobshop/Data.cpp
+	"Data.h"
+
+1539860582 source:/home/LOCAL.ISIMA.FR/mabane/Bureau/OAD/jobshop/main.cpp
+	<iostream>
+	"instance.h"
+
+1539860429 /home/LOCAL.ISIMA.FR/mabane/Bureau/OAD/jobshop/instance.h
+	<string>
+	"Data.h"
+
+1539337656 source:/home/LOCAL.ISIMA.FR/mabane/Bureau/OAD/jobshop/Operation.cpp
+	"Operation.h"
+
+1539860348 source:/home/LOCAL.ISIMA.FR/mabane/Bureau/OAD/jobshop/instance.cpp
+	"instance.h"
+	<fstream>
+	<string>
+	<iostream>
+

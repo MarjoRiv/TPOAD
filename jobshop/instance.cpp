@@ -5,13 +5,18 @@
 
 using namespace std;
 
-void lecture_instance(Data& D)
+void lecture_instance(Data& D, string f_instance)
 {
-    ifstream instance("STARTING_CODE/INSTANCES/la01.dat");
+    f_instance = "STARTING_CODE/INSTANCES/" + f_instance;
+    ifstream instance(f_instance);
+    if(!instance)
+    {
+        cout << "Erreur d'ouverture du fichier !" << endl;
+    }
     string ligne;
     int n, m;//, machine, duree;
     getline(instance, ligne);
-    cout << ligne <<endl;
+    //cout << ligne <<endl;
     instance >> n;
     instance >> m;
     cout << n << " " << m << endl;

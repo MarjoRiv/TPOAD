@@ -6,7 +6,6 @@ int main()
 {
     cout << "Hello world!" << endl;
     Data D;
-    lecture_instance(D);
-    cout << D.get_m();
+    lecture_instance(D, "la01.dat");
     return 0;
 }
