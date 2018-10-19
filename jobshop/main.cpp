@@ -4,8 +4,10 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello world!" << endl;
     Data D;
     lecture_instance(D, "la01.dat");
+    D.afficher_instance();
+    D.afficher();
+    //D.afficher_solution_makespan();
     return 0;
 }
