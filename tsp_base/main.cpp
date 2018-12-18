@@ -36,9 +36,12 @@ void runHeuristics (Data & d)
   Solution sol(d);
   Solution sol2(d);
   Solution sol3(d);
+  Solution sol4(d);
   Chronometer::Duration time;
   Chronometer::Duration time2;
   Chronometer::Duration time3;
+  Chronometer::Duration time4;
+  Chronometer::Duration time5;
 
   // first basic heuristic
   if (true)
@@ -72,6 +75,29 @@ void runHeuristics (Data & d)
   report(sol3.real_value(), time3, d.bkr().value_);
     
   sol3.check();
+  
+  sol4=sol3;
+   // 2-Opt heuristic
+  if (true)
+  {
+    std::cout << "2-Opt heuristique d'amélioration" << std::flush;
+    Chronometer chr(time4);
+    twoOpt(sol3);
+  }
+  report(sol3.real_value(), time4, d.bkr().value_);
+    
+  sol3.check();
+  
+   // 3-Opt heuristic
+  if (true)
+  {
+    std::cout << "3-Opt heuristique d'amélioration" << std::flush;
+    Chronometer chr(time5);
+    threeOpt(sol4);
+  }
+  report(sol4.real_value(), time5, d.bkr().value_);
+    
+  sol4.check();
   //std::cout << sol << std::endl;
 }
 
