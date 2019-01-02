@@ -14,4 +14,4 @@ int threeOpt(Solution & sol);
 void VND2Opt(Solution & s);
 // metaheuristics
 void VNSShaking (Solution & s, int k);
-Solution& Shaking(Solution & s);
+Solution& Shaking(Solution & s, int k);

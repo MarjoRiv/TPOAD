@@ -196,23 +196,13 @@ int threeOpt(Solution & sol)
             best_i = i;
             best_j = j;
             best_k = k; 
-            next_i = sol.next(i);
-            next_j = sol.next(j);
-            next_k = sol.next(k);
 
-           /*for (unsigned l = next_i; l != next_k; l = sol.prev((l)))
-           {
-                 std::swap(sol.prev(l), sol.next(l));
-
-           }*/
-           
-          
-           
-           sol.next(i) = next_i; sol.prev(k) = i;
-           sol.next(i) = k; sol.prev(k) = i;
-          
-          sol.next(next_i) = next_j; sol.prev(next_j) = next_i;
-          sol.next(next_k) = next_i; sol.prev(next_k) = next_i;
+            sol.next(i) = sol.next(k); 
+            sol.next(next_j) =j;
+            sol.next(k)=next_k;
+            sol.prev(sol.next(k)) = i;
+            sol.prev(j) = next_j;
+            sol.prev(next_k) = k;
             
            sol.value() -= delta; 
 

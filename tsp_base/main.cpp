@@ -112,7 +112,7 @@ void runHeuristics (Data & d)
     
   sol5.check();
    // 3-Opt heuristic
- /* if (true)
+  if (true)
   {
     std::cout << "3-Opt heuristique d'amélioration" << std::flush;
     Chronometer chr(time5);
@@ -120,7 +120,7 @@ void runHeuristics (Data & d)
   }
   report(sol4.real_value(), time5, d.bkr().value_);
     
-  sol4.check();*/
+  sol4.check();
   //std::cout << sol << std::endl;
 }
 
