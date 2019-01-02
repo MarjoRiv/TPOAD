@@ -166,15 +166,15 @@ void Cheapest_insertion (Solution & sol,int a, int b)
 
 int threeOpt(Solution & sol)
 {
-   //std::cout << "entering " << __PRETTY_FUNCTION__ << std::endl;
+    
   int delta = 0;
   const Data & data = sol.data();
-
-  // scan for an improving 2opt
-  unsigned best_i, best_j;
+  
+  unsigned best_i, best_j,best_k;
   unsigned start_i = 0;
   unsigned next_i = sol.next(0);
   unsigned stop_i = sol.prev(sol.prev(0));
+
   for (unsigned i = start_i; i != stop_i; i = next_i, next_i = sol.next(next_i))
   {
     unsigned start_j = sol.next(next_i);
@@ -182,44 +182,44 @@ int threeOpt(Solution & sol)
     unsigned stop_j = ((i == start_i) ? stop_i : sol.prev(start_i));
     for (unsigned j = start_j; j != stop_j; j = next_j, next_j = sol.next(next_j))
     {
-      delta = int(data(i,next_i) + data(j,next_j)) - int(data(i,j) + data(next_i,next_j));
-      if (delta > 0)
-      {
-          best_i = i;
-          best_j = j;
+        
+        unsigned start_k = sol.next(next_j);
+        unsigned next_k = sol.next(start_k);
+        unsigned stop_k = ((j == start_j) ? stop_j : sol.prev(start_j));
+      for (unsigned k = start_k; k != stop_k; k = next_k, next_k = sol.next(next_k))
+      {  
+        delta =  int(data(i,j)+ data(j, next_j) +data(j,k)+ data(k,next_k))
+                -int(data(i,next_i) + data(j,next_j)+ data(k,next_k));
+        if (delta > 0)
+        {
+            best_i = i;
+            best_j = j;
+            best_k = k; 
+            next_i = sol.next(i);
+            next_j = sol.next(j);
+            next_k = sol.next(k);
 
-          // std::cout << "2opt: got an improvement, gain = " << delta << " on i = " << i << " and  j = " << j << std::endl;
-          goto twoOpt_update;
-      }
+           /*for (unsigned l = next_i; l != next_k; l = sol.prev((l)))
+           {
+                 std::swap(sol.prev(l), sol.next(l));
+
+           }*/
+           
+          
+           
+           //sol.next(i) = next_i; sol.prev(k) = i;
+           sol.next(i) = k; sol.prev(k) = i;
+          
+         // sol.next(next_i) = next_j; sol.prev(next_j) = next_i;
+          sol.next(next_k) = next_i; sol.prev(next_k) = next_i;
+            
+           sol.value() -= delta; 
+
+           sol.check();
+        }
+       }
     }
   }
-
-  // check for an improving 2opt
-  if (delta > 0)
-  {
-    twoOpt_update:
-    // found one
-    unsigned i = best_i;
-    next_i = sol.next(i);
-    unsigned j = best_j;
-    unsigned next_j = sol.next(j);
-
-    // revert the segment next_i -> j
-    for (unsigned k = next_i; k != next_j; k = sol.prev((k)))
-    {
-      std::swap(sol.prev(k), sol.next(k));
-    }
-
-    // set the connections (i,j) (next_i,next_j)
-    sol.next(i) = j; sol.prev(j) = i;
-    sol.next(next_i) = next_j; sol.prev(next_j) = next_i;
-    sol.value() -= delta;
-
-    sol.check();
-  }
-
-  //std::cout << "leaving " << __PRETTY_FUNCTION__ << std::endl;
-
   return std::max(delta,0);
 }
 
