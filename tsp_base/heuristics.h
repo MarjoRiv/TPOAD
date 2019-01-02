@@ -11,6 +11,7 @@ void Cheapest_insertion(Solution &, int a = 0 , int b =1);
 int twoOpt (Solution &);
 int threeOpt(Solution & sol);
 // local search
-
+void VND2Opt(Solution & s);
 // metaheuristics
-
+void VNSShaking (Solution & s, int k);
+Solution& Shaking(Solution & s);

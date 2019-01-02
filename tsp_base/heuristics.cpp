@@ -4,6 +4,7 @@
 
 #include <algorithm>
 
+#include <time.h>
 
 // H1: create the natural sequence (0, 1, 2 ..., n-1)
 void H1_heuristic (Solution & sol)
@@ -155,9 +156,9 @@ void Cheapest_insertion (Solution & sol,int a, int b)
                     }
 	    visite[neighboormin]=true;
 	    sol.remove(b);
-		sol.insert(neighboormin,a);
-		sol.insert(b,neighboormin);
-		a=neighboormin;
+	    sol.insert(neighboormin,a);
+	    sol.insert(b,neighboormin);
+	    a=neighboormin;
 		
 		
 	  }
@@ -207,10 +208,10 @@ int threeOpt(Solution & sol)
            
           
            
-           //sol.next(i) = next_i; sol.prev(k) = i;
+           sol.next(i) = next_i; sol.prev(k) = i;
            sol.next(i) = k; sol.prev(k) = i;
           
-         // sol.next(next_i) = next_j; sol.prev(next_j) = next_i;
+          sol.next(next_i) = next_j; sol.prev(next_j) = next_i;
           sol.next(next_k) = next_i; sol.prev(next_k) = next_i;
             
            sol.value() -= delta; 
@@ -223,6 +224,43 @@ int threeOpt(Solution & sol)
   return std::max(delta,0);
 }
 
+
+void VND2Opt(Solution & s0)
+{
+    Solution best = s0;
+    int gain = twoOpt(best);
+    while (gain > 0)
+    {
+        gain = twoOpt(best);
+    }
+}
+
+void VNSShaking (Solution & s, int k)
+{
+    int i = 1;
+    Solution s2 = s;
+    while (i < k)
+    {
+        s2=Shaking(s,k);
+        VND2Opt(s);
+        if(s2.value() < s.value())
+        {
+            i=1;
+            s=s2;
+        }
+        else
+        {
+            i++;
+        }
+    }
+    s.check();
+}
+
+Solution& Shaking(Solution & s, int k)
+{
+    
+    return s;
+}
 /* ======================================================================= */
 /* end of file                                                             */
 /* ======================================================================= */
