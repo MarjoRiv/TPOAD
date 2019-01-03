@@ -12,6 +12,7 @@ int twoOpt (Solution &);
 int threeOpt(Solution & sol);
 // local search
 void VND2Opt(Solution & s);
+void VND3Opt(Solution & s);
 // metaheuristics
 void VNSShaking (Solution & s, int k);
 Solution& Shaking(Solution & s, int k);

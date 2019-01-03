@@ -167,51 +167,21 @@ void Cheapest_insertion (Solution & sol,int a, int b)
 
 int threeOpt(Solution & sol)
 {
-    
-  int delta = 0;
+  int gain = 0;
   const Data & data = sol.data();
   
-  unsigned best_i, best_j,best_k;
   unsigned start_i = 0;
   unsigned next_i = sol.next(0);
   unsigned stop_i = sol.prev(sol.prev(0));
-
+           
   for (unsigned i = start_i; i != stop_i; i = next_i, next_i = sol.next(next_i))
   {
-    unsigned start_j = sol.next(next_i);
-    unsigned next_j = sol.next(start_j);
-    unsigned stop_j = ((i == start_i) ? stop_i : sol.prev(start_i));
-    for (unsigned j = start_j; j != stop_j; j = next_j, next_j = sol.next(next_j))
-    {
+      gain = twoOpt(sol);
+      sol.check();
         
-        unsigned start_k = sol.next(next_j);
-        unsigned next_k = sol.next(start_k);
-        unsigned stop_k = ((j == start_j) ? stop_j : sol.prev(start_j));
-      for (unsigned k = start_k; k != stop_k; k = next_k, next_k = sol.next(next_k))
-      {  
-        delta =  int(data(i,j)+ data(j, next_j) +data(j,k)+ data(k,next_k))
-                -int(data(i,next_i) + data(j,next_j)+ data(k,next_k));
-        if (delta > 0)
-        {
-            best_i = i;
-            best_j = j;
-            best_k = k; 
-
-            sol.next(i) = sol.next(k); 
-            sol.next(next_j) =j;
-            sol.next(k)=next_k;
-            sol.prev(sol.next(k)) = i;
-            sol.prev(j) = next_j;
-            sol.prev(next_k) = k;
-            
-           sol.value() -= delta; 
-
-           sol.check();
-        }
-       }
-    }
   }
-  return std::max(delta,0);
+  return gain;
+  
 }
 
 
@@ -225,9 +195,19 @@ void VND2Opt(Solution & s0)
     }
 }
 
+void VND3Opt(Solution & s0)
+{
+    Solution best = s0;
+    int gain = threeOpt(best);
+    while (gain > 0)
+    {
+        gain = threeOpt(best);
+    }
+}
+
 void VNSShaking (Solution & s, int k)
 {
-    int i = 1;
+    int i = 0;
     Solution s2 = s;
     while (i < k)
     {
@@ -248,7 +228,21 @@ void VNSShaking (Solution & s, int k)
 
 Solution& Shaking(Solution & s, int k)
 {
-    
+    srand(time(0));
+    int i = rand() % s.data().size();
+    const std::vector<Node> & nodes1   = s.data().nodes();
+    std::vector<Node> nodes = nodes1;
+    std::random_shuffle(nodes.begin()+i,nodes.begin()+i+k);
+     for (unsigned int j = i ; j < (unsigned int) i+k ; ++j)
+    {    
+            s.remove(j);
+    }
+    for (unsigned int j = i ; j < (unsigned int) i+k ; j++)
+    { 
+       s.insert(j,j-1);
+      
+    }
+    s.check();
     return s;
 }
 /* ======================================================================= */

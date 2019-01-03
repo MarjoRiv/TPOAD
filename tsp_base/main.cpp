@@ -43,7 +43,6 @@ void runHeuristics (Data & d)
   Chronometer::Duration time3;
   Chronometer::Duration time4;
   Chronometer::Duration time5;
-  Chronometer::Duration time6;
 
   // first basic heuristic
   if (true)
@@ -84,43 +83,23 @@ void runHeuristics (Data & d)
   {
     std::cout << "2-Opt heuristique d'amélioration" << std::flush;
     Chronometer chr(time4);
-    twoOpt(sol3);
+    twoOpt(sol4);
   }
-  report(sol3.real_value(), time4, d.bkr().value_);
-    
-  sol3.check();
-  sol5=sol3;
-  //VND 2-Opt
-  if (true)
-  {
-    std::cout << "VND 2-Opt" << std::flush;
-    Chronometer chr(time5);
-    VND2Opt(sol4);
-  }
-  report(sol4.real_value(), time5, d.bkr().value_);
+  report(sol4.real_value(), time4, d.bkr().value_);
     
   sol4.check();
   
-  // VNS
-  if (true)
-  {
-    std::cout << "VNS" << std::flush;
-    Chronometer chr(time6);
-    VNSShaking(sol5,1);
-  }
-  report(sol5.real_value(), time6, d.bkr().value_);
-    
-  sol5.check();
+  sol5=sol3;
    // 3-Opt heuristic
   if (true)
   {
     std::cout << "3-Opt heuristique d'amélioration" << std::flush;
     Chronometer chr(time5);
-    threeOpt(sol4);
+    threeOpt(sol5);
   }
-  report(sol4.real_value(), time5, d.bkr().value_);
+  report(sol5.real_value(), time5, d.bkr().value_);
     
-  sol4.check();
+  sol5.check();
   //std::cout << sol << std::endl;
 }
 
@@ -129,8 +108,48 @@ void runHeuristics (Data & d)
 // metaheuristics
 // =======================================================================
 
-void runMetaheuristics (Data &)
+void runMetaheuristics (Data & d)
 {
+    Solution sol(d);
+    Solution sol2(d);
+    Solution sol3(d);
+    Chronometer::Duration time;
+    Chronometer::Duration time2;
+    Chronometer::Duration time3;
+    Cheapest_insertion(sol, 0,1);
+    sol2=sol;
+    twoOpt(sol);
+    //VND 2-Opt
+    if (true)
+    {
+      std::cout << "VND 2-Opt" << std::flush;
+      Chronometer chr(time);
+      VND2Opt(sol);
+      sol3=sol;
+    }
+    report(sol.real_value(), time, d.bkr().value_);
+    
+    sol.check();
+     //VND 3-Opt
+    if (true)
+    {
+      std::cout << "VND 3-Opt" << std::flush;
+      Chronometer chr(time2);
+      VND3Opt(sol2);
+    }
+    report(sol2.real_value(), time2, d.bkr().value_);
+    
+    sol2.check();
+    // VNS
+    if (true)
+    {
+        std::cout << "VNS" << std::flush;
+        Chronometer chr(time3);
+        VNSShaking(sol3,5);
+    }
+    report(sol3.real_value(), time3, d.bkr().value_);
+    
+    sol3.check();
 }
 
 
@@ -171,7 +190,7 @@ int main (int argc, char * argv[])
 
   /* answer the questions */
   runHeuristics (pb); // heuristics
-
+  runMetaheuristics(pb); // Metaheuristiques
   return 0;
 }
 
